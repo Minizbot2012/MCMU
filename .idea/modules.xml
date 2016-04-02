@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MCMU/MCMU.iml" filepath="$PROJECT_DIR$/MCMU/MCMU.iml" />
-      <module fileurl="file://$PROJECT_DIR$/gson/gson.iml" filepath="$PROJECT_DIR$/gson/gson.iml" />
     </modules>
   </component>
 </project>

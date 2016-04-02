@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact name="Build">
+    <output-path>$PROJECT_DIR$/out/artifacts/Build</output-path>
+    <root id="root">
+      <element id="archive" name="MCMU.jar">
+        <element id="module-output" name="MCMU" />
+        <element id="extracted-dir" path="$PROJECT_DIR$/lib/gson-2.6.2.jar" path-in-jar="/" />
+      </element>
+    </root>
+  </artifact>
+</component>
