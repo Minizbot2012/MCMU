@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact name="Build">
+  <artifact build-on-make="true" name="Build">
     <output-path>$PROJECT_DIR$/out/artifacts/Build</output-path>
     <root id="root">
       <element id="archive" name="MCMU.jar">
