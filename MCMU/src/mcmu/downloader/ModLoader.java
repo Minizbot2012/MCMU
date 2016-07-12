@@ -3,6 +3,8 @@ package mcmu.downloader;
 import mcmu.MCMU;
 import mcmu.downloader.containers.DLOBJ;
 import mcmu.downloader.containers.RMOBJ;
+import mcmu.downloader.threads.DownloadThread;
+import mcmu.downloader.threads.RemoveThread;
 import mcmu.utils.FileList;
 
 import java.util.concurrent.ExecutorService;

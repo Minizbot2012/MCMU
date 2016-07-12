@@ -1,4 +1,4 @@
-package mcmu.downloader;
+package mcmu.downloader.threads;
 
 import mcmu.downloader.containers.RMOBJ;
 

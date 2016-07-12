@@ -1,4 +1,4 @@
-package mcmu.downloader;
+package mcmu.downloader.loaders;
 
 import com.google.gson.Gson;
 import mcmu.MCMU;

@@ -1,9 +1,9 @@
 package mcmu;
 
 import com.google.gson.Gson;
-import mcmu.downloader.ConfigLoader;
-import mcmu.downloader.IdxLoader;
-import mcmu.downloader.LocalIdxLoader;
+import mcmu.downloader.loaders.ConfigLoader;
+import mcmu.downloader.loaders.IdxLoader;
+import mcmu.downloader.loaders.LocalIdxLoader;
 import mcmu.downloader.ModLoader;
 import mcmu.utils.ConfigFile;
 import mcmu.utils.FileList;

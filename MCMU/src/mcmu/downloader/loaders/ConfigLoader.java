@@ -1,4 +1,4 @@
-package mcmu.downloader;
+package mcmu.downloader.loaders;
 
 import mcmu.MCMU;
 import mcmu.utils.Utils;
