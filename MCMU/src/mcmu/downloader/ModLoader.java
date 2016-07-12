@@ -5,7 +5,7 @@ import mcmu.downloader.containers.DLOBJ;
 import mcmu.downloader.containers.RMOBJ;
 import mcmu.downloader.threads.DownloadThread;
 import mcmu.downloader.threads.RemoveThread;
-import mcmu.utils.FileList;
+import mcmu.downloader.containers.FileList;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

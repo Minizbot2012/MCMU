@@ -2,7 +2,7 @@ package mcmu.downloader.loaders;
 
 import com.google.gson.Gson;
 import mcmu.MCMU;
-import mcmu.utils.FileList;
+import mcmu.downloader.containers.FileList;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,23 +1,17 @@
 package mcmu;
 
 import com.google.gson.Gson;
-import mcmu.downloader.loaders.ConfigLoader;
-import mcmu.downloader.loaders.IdxLoader;
-import mcmu.downloader.loaders.LocalIdxLoader;
+import mcmu.downloader.loaders.*;
 import mcmu.downloader.ModLoader;
-import mcmu.utils.ConfigFile;
-import mcmu.utils.FileList;
+import mcmu.downloader.containers.*;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
 public class MCMU
 {
   static String DLURL;
-  public static String Side;
+  public static Sided Side;
   public static String ConfURL = "";
   public static Map<String, FileList> filst = new HashMap<>();
   public static boolean loadRemote = true;

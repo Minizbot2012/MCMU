@@ -41,7 +41,7 @@ public class DownloadThread implements Runnable {
             }
             catch (IOException exception) {}
         }
-        if (obj.Side.toLowerCase().equals(MCMU.Side.toLowerCase()) || obj.Side.toLowerCase().equals("both")) {
+        if (obj.Side.isClient() == MCMU.Side.isClient() || obj.Side.isServer() == MCMU.Side.isServer()) {
             System.out.println("Started downloading : " + obj.FileName + " : " + obj.Hash);
             byte[] byt = GetFile(obj.URL);
             if (byt == null) {

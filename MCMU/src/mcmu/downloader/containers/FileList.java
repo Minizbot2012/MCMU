@@ -1,4 +1,4 @@
-package mcmu.utils;
+package mcmu.downloader.containers;
 
 import mcmu.downloader.containers.DLOBJ;
 import mcmu.downloader.containers.RMOBJ;
