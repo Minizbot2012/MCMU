@@ -4,6 +4,7 @@ import mcmu.MCMU;
 import mcmu.downloader.containers.DLOBJ;
 import mcmu.utils.Utils;
 
+import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -64,7 +65,8 @@ public class DownloadThread implements Runnable {
         byte[] bytes;
         try
         {
-            bytes = Utils.getBytes(new URL(Addr).openStream());
+            HttpsURLConnection conn = (HttpsURLConnection) new URL(Addr).openConnection();
+            bytes = Utils.getBytes(conn.getInputStream());
         }
         catch (MalformedURLException ex)
         {
