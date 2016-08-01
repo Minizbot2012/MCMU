@@ -67,6 +67,7 @@ public class DownloadThread implements Runnable {
         try
         {
             URLConnection conn = new URL(Addr).openConnection();
+            conn.setRequestProperty("Accept", "applicaction/octet-stream");
             bytes = Utils.getBytes(conn.getInputStream());
         }
         catch (MalformedURLException ex)
