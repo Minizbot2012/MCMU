@@ -6,6 +6,7 @@ import mcmu.utils.Utils;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -66,8 +67,13 @@ public class DownloadThread implements Runnable {
         byte[] bytes;
         try
         {
-            URLConnection conn = new URL(Addr).openConnection();
-            conn.setRequestProperty("Accept", "applicaction/octet-stream");
+            HttpURLConnection conn = (HttpURLConnection) new URL(Addr).openConnection();
+            conn.connect();
+            switch(conn.getResponseCode()) {
+                case 307:case 302:
+                    String newURL = conn.getHeaderField("Location");
+                    return this.GetFile(newURL);
+            }
             bytes = Utils.getBytes(conn.getInputStream());
         }
         catch (MalformedURLException ex)
@@ -78,6 +84,7 @@ public class DownloadThread implements Runnable {
         catch (IOException ex)
         {
             System.out.println("Unable to download mod at: " + Addr);
+            System.out.println(ex.getMessage());
             return null;
         }
         return bytes;
