@@ -8,6 +8,7 @@ import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 
 /**
  * Created by bradl on 2/20/2016.
@@ -65,7 +66,7 @@ public class DownloadThread implements Runnable {
         byte[] bytes;
         try
         {
-            HttpsURLConnection conn = (HttpsURLConnection) new URL(Addr).openConnection();
+            URLConnection conn = new URL(Addr).openConnection();
             bytes = Utils.getBytes(conn.getInputStream());
         }
         catch (MalformedURLException ex)
