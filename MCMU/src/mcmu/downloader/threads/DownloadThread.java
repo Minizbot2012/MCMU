@@ -68,6 +68,7 @@ public class DownloadThread implements Runnable {
         try
         {
             HttpURLConnection conn = (HttpURLConnection) new URL(Addr).openConnection();
+            conn.setInstanceFollowRedirects(true);
             conn.connect();
             switch(conn.getResponseCode()) {
                 case 307:case 302:
