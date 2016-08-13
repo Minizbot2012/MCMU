@@ -34,11 +34,13 @@ public class DownloadThread implements Runnable {
             fl = new File(path+".disabled");
             if(obj.Override == CompatOverride.Enable) {
                 fl.renameTo(new File(path));
+                fl = new File(path);
             }
         } else {
             fl = new File(path);
-            if(obj.Override == CompatOverride.Disable) {
-                fl.renameTo(new File(path+".disabled"));
+            if (obj.Override == CompatOverride.Disable) {
+                fl.renameTo(new File(path + ".disabled"));
+                fl = new File(path + ".disabled");
             }
         }
         if (fl.exists() || folder.mkdirs()) {
