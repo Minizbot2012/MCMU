@@ -1,6 +1,7 @@
 package mcmu.downloader.threads;
 
 import mcmu.MCMU;
+import mcmu.downloader.containers.CompatOverride;
 import mcmu.downloader.containers.DLOBJ;
 import mcmu.utils.Utils;
 
@@ -28,10 +29,18 @@ public class DownloadThread implements Runnable {
         String path = obj.Folder + obj.FileName + obj.Ext;
         File folder = new File(obj.Folder);
         File flDisabled = new File(path+".disabled");
+        File fl;
         if(flDisabled.exists()) {
-            return;
+            fl = new File(path+".disabled");
+            if(obj.Override == CompatOverride.Enable) {
+                fl.renameTo(new File(path));
+            }
+        } else {
+            fl = new File(path);
+            if(obj.Override == CompatOverride.Disable) {
+                fl.renameTo(new File(path+".disabled"));
+            }
         }
-        File fl = new File(path);
         if (fl.exists() || folder.mkdirs()) {
             try
             {

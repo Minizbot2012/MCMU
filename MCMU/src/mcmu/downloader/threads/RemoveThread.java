@@ -16,9 +16,7 @@ public class RemoveThread implements Runnable {
     public void run() {
         File rmFile = new File(this.rmobj.Folder + "/"+ this.rmobj.FileName + "/" + this.rmobj.Ext);
         if(rmFile.exists()) {
-            System.out.println("Removing mod: " + this.rmobj.FileName);
             rmFile.delete();
-            System.out.println("Removed mod: " + this.rmobj.FileName);
         }
     }
 }
