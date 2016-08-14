@@ -24,7 +24,7 @@ public class ConfigLoader
       {
         FileInputStream fis = new FileInputStream(fl);
         String b64hash = Utils.MD5B64(fis);
-        if(b64hash.equals(new URL(MCMU.ConfURL).openConnection().getHeaderField("content-md5"))) {
+        if(b64hash.equals(new URL(MCMU.ConfURL+".hash").openConnection().getContent())) {
           return;
         }
       }
