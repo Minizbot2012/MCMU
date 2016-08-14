@@ -1,5 +1,6 @@
 package mcmu.downloader.loaders;
 
+import com.sun.org.apache.xml.internal.security.utils.Base64;
 import mcmu.MCMU;
 import mcmu.utils.Utils;
 
@@ -22,7 +23,8 @@ public class ConfigLoader
       if (fl.exists())
       {
         FileInputStream fis = new FileInputStream(fl);
-        if (Utils.MD5(fis).equals(new BufferedReader(new InputStreamReader(new URL(MCMU.ConfURL + ".hash").openStream())).readLine())) {
+        String b64hash = Utils.MD5B64(fis);
+        if(b64hash.equals(new URL(MCMU.ConfURL).openConnection().getHeaderField("content-md5"))) {
           return;
         }
       }
