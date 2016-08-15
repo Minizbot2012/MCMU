@@ -1,12 +1,14 @@
 package mcmu.downloader.loaders;
 
 import com.sun.org.apache.xml.internal.security.utils.Base64;
+import com.sun.org.apache.xml.internal.serializer.utils.SystemIDResolver;
 import mcmu.MCMU;
 import mcmu.utils.Utils;
 
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,7 +26,9 @@ public class ConfigLoader
       {
         FileInputStream fis = new FileInputStream(fl);
         String b64hash = Utils.MD5B64(fis);
-        if(b64hash.equals(new URL(MCMU.ConfURL+".hash").openConnection().getContent())) {
+        BufferedReader in = new BufferedReader(new InputStreamReader(new URL(MCMU.ConfURL+".hash").openConnection().getInputStream()));
+        String h = in.readLine();
+        if(b64hash.equals(h)) {
           return;
         }
       }
