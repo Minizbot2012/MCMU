@@ -9,13 +9,15 @@ import java.io.File;
  */
 public class RemoveThread implements Runnable {
     protected RMOBJ rmobj;
+
     public RemoveThread(RMOBJ obj) {
         this.rmobj = obj;
     }
+
     @Override
     public void run() {
-        File rmFile = new File(this.rmobj.Folder + "/"+ this.rmobj.FileName + "/" + this.rmobj.Ext);
-        if(rmFile.exists()) {
+        File rmFile = new File(this.rmobj.Folder + "/" + this.rmobj.FileName + "/" + this.rmobj.Ext);
+        if (rmFile.exists()) {
             rmFile.delete();
         }
     }

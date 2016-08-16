@@ -1,14 +1,15 @@
 package mcmu.utils;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 public class Utils {
     public static byte[] getBytes(InputStream is) throws IOException {
         int size = 1024;
@@ -42,6 +43,7 @@ public class Utils {
         }
         return null;
     }
+
     public static String MD5B64(InputStream fis) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
