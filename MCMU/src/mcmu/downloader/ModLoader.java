@@ -25,7 +25,7 @@ public class ModLoader
               Runnable worker = new RemoveThread(fil);
               executor.execute(worker);
           }
-          if (!files.ConfURL.equals("")) {
+          if (!"".equals(files.ConfURL)) {
               executor.execute(new ConfigThread(files.ConfURL));
           }
       }
