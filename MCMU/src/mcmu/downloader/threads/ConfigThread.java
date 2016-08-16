@@ -30,6 +30,7 @@ public class ConfigThread implements Runnable
     try
     {
       File fl = new File("config.zip");
+        System.out.println("Downloading Configs");
       if (fl.exists())
       {
         FileInputStream fis = new FileInputStream(fl);
@@ -37,6 +38,7 @@ public class ConfigThread implements Runnable
         BufferedReader in = new BufferedReader(new InputStreamReader(new URL(this.ConfURL+".hash").openConnection().getInputStream()));
         String h = in.readLine();
         if(b64hash.equals(h)) {
+            System.out.println("Configs already up to date");
           return;
         }
       }
@@ -64,6 +66,7 @@ public class ConfigThread implements Runnable
           cofos.close();
         }
       }
+      System.out.println("Configs updated");
     }
     catch (MalformedURLException ex)
     {

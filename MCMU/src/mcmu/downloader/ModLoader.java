@@ -25,10 +25,9 @@ public class ModLoader
               Runnable worker = new RemoveThread(fil);
               executor.execute(worker);
           }
-      }
-      String ConfURL = MCMU.filst.get("remote").ConfURL;
-      if (!ConfURL.equals("")) {
-          executor.execute(new ConfigThread(ConfURL));
+          if (!files.ConfURL.equals("")) {
+              executor.execute(new ConfigThread(files.ConfURL));
+          }
       }
       executor.shutdown();
       while(!executor.isTerminated());
