@@ -24,7 +24,6 @@ public class ModLoader {
                 executor.execute(worker);
             }
             if (!"".equals(files.config.URL)) {
-                System.out.println(files.config.URL);
                 executor.execute(new ConfigThread(files.config.URL, files.config.ID));
             }
         }
