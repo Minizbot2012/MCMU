@@ -3,6 +3,7 @@ package mcmu.downloader;
 import mcmu.MCMU;
 import mcmu.downloader.containers.DLOBJ;
 import mcmu.downloader.containers.RMOBJ;
+import mcmu.downloader.threads.ConfigThread;
 import mcmu.downloader.threads.DownloadThread;
 import mcmu.downloader.threads.RemoveThread;
 import mcmu.downloader.containers.FileList;
@@ -14,19 +15,23 @@ public class ModLoader
 {
   public ModLoader()
   {
-    ExecutorService executor = Executors.newFixedThreadPool(8);
-    for (FileList files : MCMU.filst.values()) {
-      for (DLOBJ fil : files.files) {
-        Runnable worker = new DownloadThread(fil);
-        executor.execute(worker);
+      ExecutorService executor = Executors.newFixedThreadPool(8);
+      for (FileList files : MCMU.filst.values()) {
+          for (DLOBJ fil : files.files) {
+              Runnable worker = new DownloadThread(fil);
+              executor.execute(worker);
+          }
+          for(RMOBJ fil: files.rmfiles) {
+              Runnable worker = new RemoveThread(fil);
+              executor.execute(worker);
+          }
       }
-      for(RMOBJ fil: files.rmfiles) {
-        Runnable worker = new RemoveThread(fil);
-        executor.execute(worker);
+      String ConfURL = MCMU.filst.get("remote").ConfURL;
+      if (!ConfURL.equals("")) {
+          executor.execute(new ConfigThread(ConfURL));
       }
-    }
-    executor.shutdown();
-    while(!executor.isTerminated());
-    System.out.println("Files Downloaded");
+      executor.shutdown();
+      while(!executor.isTerminated());
+      System.out.println("Files Downloaded");
   }
 }

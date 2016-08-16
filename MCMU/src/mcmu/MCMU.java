@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import mcmu.downloader.loaders.*;
 import mcmu.downloader.ModLoader;
 import mcmu.downloader.containers.*;
+import mcmu.downloader.threads.ConfigThread;
 
 import java.io.*;
 import java.util.*;
@@ -12,7 +13,6 @@ public class MCMU
 {
   static String DLURL;
   public static Sided Side;
-  public static String ConfURL = "";
   public static Map<String, FileList> filst = new HashMap<>();
   public static boolean loadRemote = true;
   
@@ -33,13 +33,6 @@ public class MCMU
     {
       System.out.println("unable to read mod-repo.json, not loading remote files");
       loadRemote = false;
-    }
-    if (loadRemote) {
-      new IdxLoader(DLURL);
-      ConfURL = filst.get("remote").ConfURL;
-      if (!ConfURL.equals("")) {
-        new ConfigLoader();
-      }
     }
     LocalIdxLoader lidx = new LocalIdxLoader();
     ModLoader ml = new ModLoader();

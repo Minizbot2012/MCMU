@@ -1,24 +1,32 @@
-package mcmu.downloader.loaders;
+package mcmu.downloader.threads;
 
-import com.sun.org.apache.xml.internal.security.utils.Base64;
-import com.sun.org.apache.xml.internal.serializer.utils.SystemIDResolver;
-import mcmu.MCMU;
 import mcmu.utils.Utils;
 
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-public class ConfigLoader
+public class ConfigThread implements Runnable
 {
-  public ConfigLoader()
+    public String ConfURL;
+  public ConfigThread(String cnfURL)
   {
+      this.ConfURL = cnfURL;
+  }
+  
+  public String dirpart(String name)
+  {
+    int s = name.lastIndexOf(File.separatorChar);
+    return s == -1 ? "" : name.substring(0, s);
+  }
+
+  @Override
+  public void run() {
     try
     {
       File fl = new File("config.zip");
@@ -26,13 +34,13 @@ public class ConfigLoader
       {
         FileInputStream fis = new FileInputStream(fl);
         String b64hash = Utils.MD5B64(fis);
-        BufferedReader in = new BufferedReader(new InputStreamReader(new URL(MCMU.ConfURL+".hash").openConnection().getInputStream()));
+        BufferedReader in = new BufferedReader(new InputStreamReader(new URL(this.ConfURL+".hash").openConnection().getInputStream()));
         String h = in.readLine();
         if(b64hash.equals(h)) {
           return;
         }
       }
-      BufferedInputStream confbuf = new BufferedInputStream(new URL(MCMU.ConfURL).openStream());
+      BufferedInputStream confbuf = new BufferedInputStream(new URL(this.ConfURL).openStream());
       byte[] byt = Utils.getBytes(confbuf);
       confbuf.close();
       File confzip = new File("config.zip");
@@ -59,17 +67,11 @@ public class ConfigLoader
     }
     catch (MalformedURLException ex)
     {
-      Logger.getLogger(ConfigLoader.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(ConfigThread.class.getName()).log(Level.SEVERE, null, ex);
     }
     catch (IOException ex)
     {
-      Logger.getLogger(ConfigLoader.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(ConfigThread.class.getName()).log(Level.SEVERE, null, ex);
     }
-  }
-  
-  public String dirpart(String name)
-  {
-    int s = name.lastIndexOf(File.separatorChar);
-    return s == -1 ? "" : name.substring(0, s);
   }
 }
