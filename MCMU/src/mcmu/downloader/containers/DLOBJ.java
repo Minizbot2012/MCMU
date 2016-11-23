@@ -3,6 +3,7 @@ package mcmu.downloader.containers;
 public class DLOBJ {
     public String URL;
     public String Hash;
+    @Deprecated
     public String FileName;
     public String Ext;
     public String Folder;

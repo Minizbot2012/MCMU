@@ -18,9 +18,13 @@ import java.net.URL;
  */
 public class DownloadThread implements Runnable {
     DLOBJ downloadInf;
-
+    String filename;
     public DownloadThread(DLOBJ download) {
         downloadInf = download;
+    }
+    public DownloadThread(String FN, DLOBJ download) {
+        downloadInf = download;
+        filename = FN;
     }
 
     @Override
@@ -29,7 +33,7 @@ public class DownloadThread implements Runnable {
     }
 
     public void saveFile(DLOBJ obj) {
-        String path = obj.Folder + obj.FileName + obj.Ext;
+        String path = obj.Folder + filename + obj.Ext;
         File folder = new File(obj.Folder);
         File flDisabled = new File(path + ".disabled");
         File fl;
