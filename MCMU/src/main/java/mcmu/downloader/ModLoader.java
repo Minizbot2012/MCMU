@@ -12,7 +12,7 @@ public class ModLoader {
     public ModLoader() {
         ExecutorService executor = Executors.newFixedThreadPool(8);
         for (FileList files : MCMU.filst.values()) {
-            if (null != files.config) {
+            if (!files.config.URL.equals("")) {
                 executor.execute(new ConfigThread(files.config.URL, files.config.ID));
             }
             for (Entry<String, DLOBJ> fil: files.files.entrySet()) {
