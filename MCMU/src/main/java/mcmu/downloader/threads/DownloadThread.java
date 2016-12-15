@@ -64,17 +64,17 @@ public class DownloadThread implements Runnable {
             }
         }
         if (obj.Side.isClient() == MCMU.Side.isClient() || obj.Side.isServer() == MCMU.Side.isServer()) {
-            System.out.println("Started downloading : " + obj.FileName + " : " + obj.Hash);
+            System.out.println("Started downloading : " + filename+ " : " + obj.Hash);
             byte[] byt = GetFile(obj.URL);
             if (byt == null) {
-                System.out.println("unable to download file: " + obj.FileName);
+                System.out.println("unable to download file: " + filename);
                 return;
             }
             try {
                 FileOutputStream fos = new FileOutputStream(path);
                 fos.write(byt);
                 fos.close();
-                System.out.println("Finished downloading: " + obj.FileName);
+                System.out.println("Finished downloading: " + filename);
             } catch (IOException ignored) {
 
             }
