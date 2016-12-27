@@ -16,7 +16,7 @@ public class RemoveThread implements Runnable {
 
     @Override
     public void run() {
-        File rmFile = new File(this.rmobj.Folder + "/" + this.rmobj.FileName + "/" + this.rmobj.Ext);
+        File rmFile = new File(this.rmobj.Folder + "/" + this.rmobj.FileName + this.rmobj.Ext);
         if (rmFile.exists()) {
             rmFile.delete();
         }
