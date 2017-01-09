@@ -17,8 +17,8 @@ import java.net.URL;
  * Created by bradl on 2/20/2016.
  */
 public class DownloadThread implements Runnable {
-    DLOBJ downloadInf;
-    String filename;
+    private DLOBJ downloadInf;
+    private String filename;
     public DownloadThread(DLOBJ download) {
         downloadInf = download;
     }
@@ -32,7 +32,7 @@ public class DownloadThread implements Runnable {
         saveFile(downloadInf);
     }
 
-    public void saveFile(DLOBJ obj) {
+    private void saveFile(DLOBJ obj) {
         String path = obj.Folder + filename + obj.Ext;
         File folder = new File(obj.Folder);
         File flDisabled = new File(path + ".disabled");
@@ -60,7 +60,7 @@ public class DownloadThread implements Runnable {
                 if (MD5.equals(obj.Hash)) {
                     return;
                 }
-            } catch (IOException exception) {
+            } catch (IOException ignored) {
             }
         }
         if (obj.Side.isClient() == MCMU.Side.isClient() || obj.Side.isServer() == MCMU.Side.isServer()) {
@@ -81,7 +81,7 @@ public class DownloadThread implements Runnable {
         }
     }
 
-    public byte[] GetFile(String Addr) {
+    private byte[] GetFile(String Addr) {
         byte[] bytes;
         try {
             HttpURLConnection conn = (HttpURLConnection) new URL(Addr).openConnection();

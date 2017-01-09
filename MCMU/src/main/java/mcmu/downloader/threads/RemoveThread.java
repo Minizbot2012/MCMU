@@ -8,7 +8,7 @@ import java.io.File;
  * Created by bradl on 2/28/2016.
  */
 public class RemoveThread implements Runnable {
-    protected RMOBJ rmobj;
+    private RMOBJ rmobj;
 
     public RemoveThread(RMOBJ obj) {
         this.rmobj = obj;

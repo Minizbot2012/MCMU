@@ -8,7 +8,7 @@ import java.net.URL;
 
 public class IdxLoader extends Loader {
     public IdxLoader(String ID, String idxURL) {
-        super(ID);
+        super();
         try {
             BufferedReader cfile = new BufferedReader(new InputStreamReader(new URL(idxURL).openStream()));
             proc(cfile);

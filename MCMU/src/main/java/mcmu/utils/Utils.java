@@ -32,12 +32,12 @@ public class Utils {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] array = md.digest(getBytes(fis));
-            StringBuffer sb = new StringBuffer();
-            for (int i = 0; i < array.length; i++) {
-                sb.append(Integer.toHexString(array[i] & 0xFF | 0x100).substring(1, 3));
+            StringBuilder sb = new StringBuilder();
+            for (byte anArray : array) {
+                sb.append(Integer.toHexString(anArray & 0xFF | 0x100).substring(1, 3));
             }
             return sb.toString();
-        } catch (NoSuchAlgorithmException localNoSuchAlgorithmException) {
+        } catch (NoSuchAlgorithmException ignored) {
         } catch (IOException ex) {
             Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -49,7 +49,7 @@ public class Utils {
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.reset();
             return Base64.getEncoder().encodeToString(md.digest(getBytes(fis)));
-        } catch (NoSuchAlgorithmException localNoSuchAlgorithmException) {
+        } catch (NoSuchAlgorithmException ignored) {
         } catch (IOException ex) {
             Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
         }

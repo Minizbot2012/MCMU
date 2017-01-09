@@ -12,16 +12,16 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 public class ConfigThread implements Runnable {
-    public String ConfURL;
-    public String ConfID;
-    String ConfFileName;
+    private String ConfURL;
+    private String ConfID;
+    private String ConfFileName;
 
     public ConfigThread(String cnfURL, String cnfID) {
         this.ConfURL = cnfURL;
         this.ConfID = cnfID;
     }
 
-    public String dirpart(String name) {
+    private String dirpart(String name) {
         int s = name.lastIndexOf(File.separatorChar);
         return s == -1 ? "" : name.substring(0, s);
     }
@@ -59,7 +59,6 @@ public class ConfigThread implements Runnable {
                 ZipEntry ent = (ZipEntry) e.nextElement();
                 InputStream is = zip.getInputStream(ent);
                 byte[] byts = Utils.getBytes(is);
-                File confile = new File("config/" + ent.getName());
                 File dir = new File(dirpart(("config/" + ent.getName()).replace("/", File.separator)));
                 dir.mkdirs();
                 if (!ent.isDirectory()) {
@@ -69,8 +68,6 @@ public class ConfigThread implements Runnable {
                 }
             }
             System.out.println("Configs updated");
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(ConfigThread.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(ConfigThread.class.getName()).log(Level.SEVERE, null, ex);
         }

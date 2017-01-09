@@ -14,19 +14,18 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class MCMU {
-    static String DLURL;
+    private static String DLURL;
     public static Sided Side;
-    public static Map<String, FileList> filst = new HashMap<>();
+    private static Map<String, FileList> filst = new HashMap<>();
 
-    public MCMU() {
+    private MCMU() {
         System.out.println("Loading mods from website in mod-repo.json");
         ConfigFile cnf;
-        ArrayList<Loader> Loaders = new ArrayList<Loader>();
+        ArrayList<Loader> Loaders = new ArrayList<>();
         try {
             BufferedReader cfile = new BufferedReader(new FileReader("mod-repo.json"));
             Gson confson = new Gson();
