@@ -1,21 +1,17 @@
 package mcmu.downloader.loaders;
 
-import com.google.gson.Gson;
-import mcmu.MCMU;
-import mcmu.downloader.containers.FileList;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class LocalIdxLoader {
-    public LocalIdxLoader() {
+public class LocalIdxLoader extends Loader {
+    public LocalIdxLoader(String FileName, String ID) {
+        super(ID);
         try {
-            BufferedReader cfile = new BufferedReader(new FileReader("local-mods.json"));
-            Gson json = new Gson();
-            MCMU.filst.put("local", json.fromJson(cfile, FileList.class));
+            BufferedReader cfile = new BufferedReader(new FileReader(FileName));
+            proc(cfile);
         } catch (IOException localIOException) {
-            System.out.println("No local-mods.json, not loading");
+            System.out.println("File not found, not loading");
         }
     }
 }
