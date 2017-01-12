@@ -13,13 +13,13 @@ public class MCMU {
     private ConfigFile cnf;
     private ArrayList<Loader> Loaders = new ArrayList<>();
 
-    private MCMU() {
+    public MCMU() {
         initializeGson();
         LoadConfig();
         LoadIndexes();
         LoadMods();
     }
-    public static void main(String[] args) {
+    public void main(String[] args) {
         new MCMU();
     }
     private void initializeGson() {
