@@ -4,8 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-class LocalIdxLoader extends Loader {
-    private LocalIdxLoader(String FileName, String ID) {
+public class LocalIdxLoader extends Loader {
+    public LocalIdxLoader(String FileName) {
         super();
         try {
             BufferedReader cfile = new BufferedReader(new FileReader(FileName));

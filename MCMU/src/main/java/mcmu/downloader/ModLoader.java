@@ -2,15 +2,15 @@ package mcmu.downloader;
 
 import mcmu.downloader.containers.*;
 import mcmu.downloader.threads.*;
+import mcmu.downloader.loaders.*;
 
 import java.util.Map.Entry;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 public class ModLoader implements Runnable {
     private FileList files;
-    public ModLoader(FileList filelist) {
-        this.files = filelist;
+    public ModLoader(Loader loader) {
+        this.files = loader.getFiles();
     }
     @Override
     public void run() {

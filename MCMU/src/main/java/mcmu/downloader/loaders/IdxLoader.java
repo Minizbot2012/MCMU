@@ -7,7 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class IdxLoader extends Loader {
-    public IdxLoader(String ID, String idxURL) {
+    public IdxLoader(String idxURL) {
         super();
         try {
             BufferedReader cfile = new BufferedReader(new InputStreamReader(new URL(idxURL).openStream()));

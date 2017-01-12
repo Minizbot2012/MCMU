@@ -2,16 +2,17 @@ package mcmu.downloader.loaders;
 
 import com.google.gson.*;
 import mcmu.downloader.containers.*;
-
-import java.io.Reader;
+import java.util.*;
+import java.io.*;
 
 /**
  * Created by bradl on 1/9/2017.
  */
 public class Loader {
-    private Gson gson = new Gson();
+    private Gson gson;
     private FileList files;
     Loader() {
+        gson = new Gson();
     }
     void proc(Reader jso) {
         try {
