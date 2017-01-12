@@ -19,7 +19,7 @@ public class MCMU {
         System.out.println("Loading mods from website in mod-repo.json");
         LoadConfig();
         LoadIndexes();
-        loadMods();
+        LoadMods();
     }
     public static void main(String[] args) {
         new MCMU();
@@ -63,13 +63,9 @@ public class MCMU {
             Loaders.add(new IdxLoader(index));
         }
     }
-    private void loadMods() {
-        ExecutorService tp = Executors.newFixedThreadPool(8);
+    private void LoadMods() {
         for (Loader files : Loaders) {
-            tp.execute(new ModLoader(files));
+            new ModLoader(files);
         }
-        tp.shutdown();
-        while (!tp.isTerminated()) ;
-        System.out.println("Files Downloaded");
     }
 }

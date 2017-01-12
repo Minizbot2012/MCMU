@@ -7,12 +7,12 @@ import mcmu.downloader.loaders.*;
 import java.util.Map.Entry;
 import java.util.concurrent.*;
 
-public class ModLoader implements Runnable {
+public class ModLoader {
     private FileList files;
     public ModLoader(Loader loader) {
         this.files = loader.getFiles();
+        run();
     }
-    @Override
     public void run() {
         ExecutorService executor = Executors.newFixedThreadPool(8);
         if (!files.config.URL.equals("")) {
