@@ -1,27 +1,18 @@
 package mcmu.downloader.threads;
 
 import mcmu.MCMU;
-import mcmu.downloader.containers.CompatOverride;
-import mcmu.downloader.containers.DLOBJ;
+import mcmu.downloader.containers.*;
 import mcmu.utils.Utils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-
+import java.io.*;
+import java.net.*;
+import static mcmu.Statics.*;
 /**
  * Created by bradl on 2/20/2016.
  */
 public class DownloadThread implements Runnable {
     private DLOBJ downloadInf;
     private String filename;
-    public DownloadThread(DLOBJ download) {
-        downloadInf = download;
-    }
     public DownloadThread(String FN, DLOBJ download) {
         downloadInf = download;
         filename = FN;
@@ -39,7 +30,7 @@ public class DownloadThread implements Runnable {
         File fl;
         if (flDisabled.exists()) {
             fl = new File(path + ".disabled");
-            if (obj.Override == CompatOverride.Enable) {
+            if (obj.Override == CompatOverride.ENABLE) {
                 fl.renameTo(new File(path));
                 fl = new File(path);
             } else {
@@ -47,7 +38,7 @@ public class DownloadThread implements Runnable {
             }
         } else {
             fl = new File(path);
-            if (obj.Override == CompatOverride.Disable) {
+            if (obj.Override == CompatOverride.DISABLE) {
                 fl.renameTo(new File(path + ".disabled"));
                 return;
             }
@@ -63,7 +54,7 @@ public class DownloadThread implements Runnable {
             } catch (IOException ignored) {
             }
         }
-        if (obj.Side.isClient() == MCMU.Side.isClient() || obj.Side.isServer() == MCMU.Side.isServer()) {
+        if (obj.Side.isClient() == Side.isClient() || obj.Side.isServer() == Side.isServer()) {
             System.out.println("Started downloading : " + filename+ " : " + obj.Hash);
             byte[] byt = GetFile(obj.URL);
             if (byt == null) {

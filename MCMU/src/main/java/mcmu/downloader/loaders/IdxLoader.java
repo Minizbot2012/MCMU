@@ -1,10 +1,7 @@
 package mcmu.downloader.loaders;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.io.*;
+import java.net.*;
 
 public class IdxLoader extends Loader {
     public IdxLoader(String idxURL) {

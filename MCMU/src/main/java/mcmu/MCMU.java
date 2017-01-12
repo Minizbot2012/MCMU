@@ -1,6 +1,7 @@
 package mcmu;
 
-import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import mcmu.JsonTypeAdapters.*;
 import mcmu.downloader.ModLoader;
 import mcmu.downloader.containers.*;
 import mcmu.downloader.loaders.*;
@@ -8,13 +9,13 @@ import mcmu.downloader.loaders.*;
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.*;
-
+import static mcmu.Statics.*;
 public class MCMU {
-    private static String DLURL;
-    public static Sided Side;
     private ConfigFile cnf;
     private ArrayList<Loader> Loaders = new ArrayList<>();
+
     private MCMU() {
+        initializeGson();
         System.out.println("Loading mods from website in mod-repo.json");
         LoadConfig();
         LoadIndexes();
@@ -23,11 +24,17 @@ public class MCMU {
     public static void main(String[] args) {
         new MCMU();
     }
+    private void initializeGson() {
+        GsonBuilder builder = new GsonBuilder();
+        EnumTypeAdapter enumType = new EnumTypeAdapter();
+        builder.registerTypeAdapter(Sided.class, enumType);
+        builder.registerTypeAdapter(CompatOverride.class, enumType);
+        Json = builder.create();
+    }
     private void LoadConfig() {
         try {
             BufferedReader cfile = new BufferedReader(new FileReader("mod-repo.json"));
-            Gson confson = new Gson();
-            cnf = confson.fromJson(cfile, ConfigFile.class);
+            cnf = Json.fromJson(cfile, ConfigFile.class);
             Side = cnf.Side;
             System.out.println("Side: " + Side);
         } catch (FileNotFoundException FNF) {

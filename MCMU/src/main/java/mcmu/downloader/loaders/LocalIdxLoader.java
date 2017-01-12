@@ -1,8 +1,6 @@
 package mcmu.downloader.loaders;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class LocalIdxLoader extends Loader {
     public LocalIdxLoader(String FileName) {
