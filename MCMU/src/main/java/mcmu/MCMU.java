@@ -8,7 +8,6 @@ import mcmu.downloader.loaders.*;
 
 import java.io.*;
 import java.util.*;
-import java.util.concurrent.*;
 import static mcmu.Statics.*;
 public class MCMU {
     private ConfigFile cnf;
@@ -16,7 +15,6 @@ public class MCMU {
 
     private MCMU() {
         initializeGson();
-        System.out.println("Loading mods from website in mod-repo.json");
         LoadConfig();
         LoadIndexes();
         LoadMods();
@@ -64,6 +62,7 @@ public class MCMU {
         }
     }
     private void LoadMods() {
+        System.out.println("Loading mods from locations in mod-repo.json");
         for (Loader files : Loaders) {
             new ModLoader(files);
         }
