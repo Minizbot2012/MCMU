@@ -3,13 +3,10 @@ package mcmu.downloader.threads;
 import mcmu.utils.Utils;
 
 import java.io.*;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Enumeration;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
+import java.util.*;
+import java.util.logging.*;
+import java.util.zip.*;
 
 public class ConfigThread implements Runnable {
     private String ConfURL;

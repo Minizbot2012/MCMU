@@ -2,7 +2,7 @@ package mcmu.downloader.threads;
 
 import mcmu.downloader.containers.RMOBJ;
 
-import java.io.File;
+import java.io.*;
 
 /**
  * Created by bradl on 2/28/2016.
