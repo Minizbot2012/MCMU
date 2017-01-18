@@ -6,7 +6,7 @@ package mcmu.downloader.containers;
 public enum Sided {
     SERVER, CLIENT, BOTH;
     public boolean isServer() {
-        return this == SERVER || this == CLIENT;
+        return this == SERVER || this == BOTH;
     }
 
     public boolean isClient() {
