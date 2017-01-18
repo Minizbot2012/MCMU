@@ -9,9 +9,10 @@ import java.lang.reflect.Type;
  */
 public class EnumTypeAdapter implements JsonDeserializer<Enum> {
     @Override
-    public Enum deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException {
+    public Enum deserialize(JsonElement json, Type type, JsonDeserializationContext context)
+            throws JsonParseException {
         try {
-            if(type instanceof Class && ((Class<?>) type).isEnum())
+            if (type instanceof Class && ((Class<?>) type).isEnum())
                 return Enum.valueOf((Class<Enum>) type, json.getAsString().toUpperCase());
             return null;
         } catch (Exception e) {
