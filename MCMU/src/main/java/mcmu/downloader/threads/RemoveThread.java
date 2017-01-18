@@ -1,7 +1,6 @@
 package mcmu.downloader.threads;
 
-import mcmu.downloader.containers.RMOBJ;
-
+import mcmu.downloader.containers.*;
 import java.io.*;
 
 /**

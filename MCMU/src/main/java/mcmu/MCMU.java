@@ -8,6 +8,7 @@ import mcmu.downloader.loaders.*;
 
 import java.io.*;
 import java.util.*;
+
 import static mcmu.Statics.*;
 public class MCMU {
     private ConfigFile cnf;
@@ -24,9 +25,8 @@ public class MCMU {
     }
     private void initializeGson() {
         GsonBuilder builder = new GsonBuilder();
-        EnumTypeAdapter enumType = new EnumTypeAdapter();
-        builder.registerTypeAdapter(Sided.class, enumType);
-        builder.registerTypeAdapter(CompatOverride.class, enumType);
+        builder.registerTypeAdapter(Sided.class, new EnumTypeAdapter());
+        builder.registerTypeAdapter(CompatOverride.class, new EnumTypeAdapter());
         Json = builder.create();
     }
     private void LoadConfig() {

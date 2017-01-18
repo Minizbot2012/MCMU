@@ -2,10 +2,10 @@ package mcmu.downloader.threads;
 
 import mcmu.downloader.containers.*;
 import mcmu.utils.Utils;
-
 import java.io.*;
 import java.net.*;
-import static mcmu.Statics.*;
+
+import static mcmu.Statics.Side;
 /**
  * Created by bradl on 2/20/2016.
  */

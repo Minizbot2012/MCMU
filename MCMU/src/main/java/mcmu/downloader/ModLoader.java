@@ -1,8 +1,8 @@
 package mcmu.downloader;
 
 import mcmu.downloader.containers.*;
+import mcmu.downloader.loaders.Loader;
 import mcmu.downloader.threads.*;
-import mcmu.downloader.loaders.*;
 
 import java.util.Map.Entry;
 import java.util.concurrent.*;

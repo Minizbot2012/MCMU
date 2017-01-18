@@ -1,8 +1,8 @@
 package mcmu.downloader.loaders;
 
-import static mcmu.Statics.Json;
 import mcmu.downloader.containers.*;
 import java.io.*;
+import static mcmu.Statics.*;
 
 /**
  * Created by bradl on 1/9/2017.
