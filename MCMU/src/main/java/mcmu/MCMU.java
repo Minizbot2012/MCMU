@@ -20,7 +20,7 @@ public class MCMU {
         LoadIndexes();
         LoadMods();
     }
-    public void main(String[] args) {
+    public static void main(String[] args) {
         new MCMU();
     }
     private void initializeGson() {
