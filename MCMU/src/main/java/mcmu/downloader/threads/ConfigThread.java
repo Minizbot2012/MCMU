@@ -35,7 +35,7 @@ public class ConfigThread implements Runnable {
             System.out.println("Downloading Configs");
             if (fl.exists()) {
                 FileInputStream fis = new FileInputStream(fl);
-                String b64hash = Utils.MD5B64(fis);
+                String b64hash = Utils.MD5(fis);
                 BufferedReader in = new BufferedReader(new InputStreamReader(new URL(this.ConfURL + ".hash").openConnection().getInputStream()));
                 String h = in.readLine();
                 if (b64hash.equals(h)) {
