@@ -43,16 +43,4 @@ public class Utils {
         }
         return null;
     }
-
-    public static String MD5B64(InputStream fis) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            md.reset();
-            return Base64.getEncoder().encodeToString(md.digest(getBytes(fis)));
-        } catch (NoSuchAlgorithmException ignored) {
-        } catch (IOException ex) {
-            Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
 }
