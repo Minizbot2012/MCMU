@@ -11,14 +11,19 @@ import java.util.*;
 
 import static mcmu.Statics.*;
 public class MCMU {
-    private ConfigFile cnf;
+    public static ConfigFile cnf;
     private ArrayList<Loader> Loaders = new ArrayList<>();
-
+    public boolean rerun = true;
     public MCMU() {
         initializeGson();
-        LoadConfig();
-        LoadIndexes();
+        while(rerun) {
+            rerun = run();
+        }
         LoadMods();
+    }
+    public boolean run() {
+        LoadConfig();
+        return LoadIndexes();
     }
     public static void main(String[] args) {
         new MCMU();
@@ -39,10 +44,15 @@ public class MCMU {
             System.out.println("unable to read mod-repo.json, not loading remote files");
         }
     }
-    private void LoadIndexes() {
+    private boolean LoadIndexes() {
         if(cnf.URL != null) {
             DLURL = cnf.URL;
             Loaders.add(new IdxLoader(DLURL));
+            if(Restart) {
+                Loaders.clear();
+                Restart=false;
+                return true;
+            }
         }
         if(cnf.localIDXs != null) {
             LoadLocalIndexes(cnf.localIDXs);
@@ -50,6 +60,7 @@ public class MCMU {
         if(cnf.URLs != null) {
             LoadRemoteIndexes(cnf.URLs);
         }
+        return false;
     }
     private void LoadLocalIndexes(ArrayList<String> indexes) {
         for(String index : indexes) {

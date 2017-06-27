@@ -16,7 +16,7 @@ public class ModLoader {
     public void run() {
         ExecutorService executor = Executors.newFixedThreadPool(8);
         if (!files.config.URL.equals("")) {
-            executor.execute(new ConfigThread(files.config.URL, files.config.ID));
+            executor.execute(new ConfigThread(files.config));
         }
         for (Entry<String, DLOBJ> fil: files.files.entrySet()) {
             Runnable worker = new DownloadThread(fil.getKey(), fil.getValue());

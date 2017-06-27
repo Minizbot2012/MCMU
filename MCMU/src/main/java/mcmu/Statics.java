@@ -10,4 +10,5 @@ public class Statics {
     public static Gson Json;
     public static String DLURL;
     public static Sided Side;
+    public static boolean Restart;
 }

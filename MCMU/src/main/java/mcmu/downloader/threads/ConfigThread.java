@@ -1,5 +1,6 @@
 package mcmu.downloader.threads;
 
+import mcmu.downloader.containers.Config;
 import mcmu.utils.Utils;
 
 import java.io.*;
@@ -9,13 +10,11 @@ import java.util.logging.*;
 import java.util.zip.*;
 
 public class ConfigThread implements Runnable {
-    private String ConfURL;
-    private String ConfID;
+    private Config conf;
     private String ConfFileName;
 
-    public ConfigThread(String cnfURL, String cnfID) {
-        this.ConfURL = cnfURL;
-        this.ConfID = cnfID;
+    public ConfigThread(Config conf) {
+        this.conf = conf;
     }
 
     private String dirpart(String name) {
@@ -26,8 +25,8 @@ public class ConfigThread implements Runnable {
     @Override
     public void run() {
         try {
-            if(this.ConfID != null) {
-                ConfFileName = "config-"+this.ConfID+".zip";
+            if(conf.ID != null) {
+                ConfFileName = "config-"+conf.ID+".zip";
             } else {
                 ConfFileName = "config.zip";
             }
@@ -35,15 +34,13 @@ public class ConfigThread implements Runnable {
             System.out.println("Downloading Configs");
             if (fl.exists()) {
                 FileInputStream fis = new FileInputStream(fl);
-                String b64hash = Utils.MD5(fis);
-                BufferedReader in = new BufferedReader(new InputStreamReader(new URL(this.ConfURL + ".hash").openConnection().getInputStream()));
-                String h = in.readLine();
-                if (b64hash.equals(h)) {
+                String hash = Utils.MD5(fis);
+                if (hash.equals(conf.Hash)) {
                     System.out.println("Configs already up to date");
                     return;
                 }
             }
-            BufferedInputStream confbuf = new BufferedInputStream(new URL(this.ConfURL).openStream());
+            BufferedInputStream confbuf = new BufferedInputStream(new URL(conf.URL).openStream());
             byte[] byt = Utils.getBytes(confbuf);
             confbuf.close();
             File confzip = new File(ConfFileName);

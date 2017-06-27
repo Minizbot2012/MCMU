@@ -6,9 +6,11 @@ package mcmu.downloader.containers;
 public class Config {
     public String URL;
     public String ID;
+    public String Hash;
 
     public Config() {
         this.URL = "";
         this.ID = "";
+        this.Hash = "";
     }
 }
