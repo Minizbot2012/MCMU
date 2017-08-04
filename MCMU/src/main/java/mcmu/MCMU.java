@@ -16,8 +16,9 @@ public class MCMU {
     public boolean rerun = true;
     public MCMU() {
         initializeGson();
-        while(rerun) {
-            rerun = run();
+        rerun = run();
+        if(rerun) {
+            run();
         }
         LoadMods();
     }
@@ -50,7 +51,6 @@ public class MCMU {
             Loaders.add(new IdxLoader(DLURL));
             if(Restart) {
                 Loaders.clear();
-                Restart=false;
                 return true;
             }
         }
