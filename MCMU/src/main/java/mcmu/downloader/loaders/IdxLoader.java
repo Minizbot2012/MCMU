@@ -2,7 +2,6 @@ package mcmu.downloader.loaders;
 
 import mcmu.MCMU;
 import mcmu.Statics;
-import mcmu.downloader.containers.ConfigFile;
 
 import java.io.*;
 import java.net.*;

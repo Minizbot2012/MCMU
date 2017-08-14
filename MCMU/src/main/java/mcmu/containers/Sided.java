@@ -1,4 +1,4 @@
-package mcmu.downloader.containers;
+package mcmu.containers;
 
 /**
  * Created by bradl on 7/12/2016.

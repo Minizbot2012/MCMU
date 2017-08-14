@@ -1,4 +1,4 @@
-package mcmu.downloader.containers;
+package mcmu.containers;
 
 import java.util.*;
 

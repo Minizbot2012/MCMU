@@ -1,6 +1,6 @@
 package mcmu.downloader.threads;
 
-import mcmu.downloader.containers.*;
+import mcmu.containers.*;
 import java.io.*;
 
 /**
@@ -15,7 +15,7 @@ public class RemoveThread implements Runnable {
 
     @Override
     public void run() {
-        File rmFile = new File(rmobj.Folder + rmobj.FileName + rmobj.Ext);
+        File rmFile = new File(rmobj.Folder.getValue() + rmobj.FileName.getValue() + rmobj.Ext.getValue());
         if (rmFile.exists()) {
             rmFile.delete();
         }

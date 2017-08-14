@@ -1,7 +1,7 @@
 package mcmu;
 
 import com.google.gson.Gson;
-import mcmu.downloader.containers.Sided;
+import mcmu.containers.Sided;
 
 /**
  * Created by bradl on 1/12/2017.

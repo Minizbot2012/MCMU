@@ -1,6 +1,6 @@
 package mcmu.downloader;
 
-import mcmu.downloader.containers.*;
+import mcmu.containers.*;
 import mcmu.downloader.loaders.Loader;
 import mcmu.downloader.threads.*;
 

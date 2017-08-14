@@ -1,6 +1,6 @@
 package mcmu.downloader.threads;
 
-import mcmu.downloader.containers.Config;
+import mcmu.containers.Config;
 import mcmu.utils.Utils;
 
 import java.io.*;
@@ -35,12 +35,12 @@ public class ConfigThread implements Runnable {
             if (fl.exists()) {
                 FileInputStream fis = new FileInputStream(fl);
                 String hash = Utils.MD5(fis);
-                if (hash.equals(conf.Hash)) {
+                if (hash.equals(conf.Hash.getValue())) {
                     System.out.println("Configs already up to date");
                     return;
                 }
             }
-            BufferedInputStream confbuf = new BufferedInputStream(new URL(conf.URL).openStream());
+            BufferedInputStream confbuf = new BufferedInputStream(new URL(conf.URL.getValue()).openStream());
             byte[] byt = Utils.getBytes(confbuf);
             confbuf.close();
             File confzip = new File(ConfFileName);

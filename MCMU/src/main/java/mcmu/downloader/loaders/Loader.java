@@ -1,6 +1,6 @@
 package mcmu.downloader.loaders;
 
-import mcmu.downloader.containers.*;
+import mcmu.containers.*;
 import java.io.*;
 import static mcmu.Statics.*;
 

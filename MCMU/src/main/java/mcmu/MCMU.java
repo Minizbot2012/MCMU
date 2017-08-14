@@ -2,8 +2,9 @@ package mcmu;
 
 import com.google.gson.GsonBuilder;
 import mcmu.JsonTypeAdapters.*;
+import mcmu.containers.typed_structures.TypedData;
 import mcmu.downloader.ModLoader;
-import mcmu.downloader.containers.*;
+import mcmu.containers.*;
 import mcmu.downloader.loaders.*;
 
 import java.io.*;
@@ -33,13 +34,14 @@ public class MCMU {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(Sided.class, new EnumTypeAdapter());
         builder.registerTypeAdapter(CompatOverride.class, new EnumTypeAdapter());
+        builder.registerTypeAdapter(TypedData.class, new TypedDataAdapter());
         Json = builder.create();
     }
     private void LoadConfig() {
         try {
             BufferedReader cfile = new BufferedReader(new FileReader("mod-repo.json"));
             cnf = Json.fromJson(cfile, ConfigFile.class);
-            Side = cnf.Side;
+            Side = cnf.Side.getValue();
             System.out.println("Side: " + Side);
         } catch (FileNotFoundException FNF) {
             System.out.println("unable to read mod-repo.json, not loading remote files");
@@ -47,7 +49,7 @@ public class MCMU {
     }
     private boolean LoadIndexes() {
         if(cnf.URL != null) {
-            DLURL = cnf.URL;
+            DLURL = cnf.URL.getValue();
             Loaders.add(new IdxLoader(DLURL));
             if(Restart) {
                 Loaders.clear();
@@ -55,10 +57,10 @@ public class MCMU {
             }
         }
         if(cnf.localIDXs != null) {
-            LoadLocalIndexes(cnf.localIDXs);
+            LoadLocalIndexes(cnf.localIDXs.getValue());
         }
         if(cnf.URLs != null) {
-            LoadRemoteIndexes(cnf.URLs);
+            LoadRemoteIndexes(cnf.URLs.getValue());
         }
         return false;
     }

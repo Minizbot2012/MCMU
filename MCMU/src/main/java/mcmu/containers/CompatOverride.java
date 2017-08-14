@@ -1,4 +1,6 @@
-package mcmu.downloader.containers;
+package mcmu.containers;
+
+import mcmu.containers.interfaces.StructEncoder;
 
 /**
  * Created by bradl on 8/13/2016.

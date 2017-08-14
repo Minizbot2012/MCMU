@@ -1,6 +1,6 @@
 package mcmu.downloader.threads;
 
-import mcmu.downloader.containers.*;
+import mcmu.containers.*;
 import mcmu.utils.Utils;
 import java.io.*;
 import java.net.*;
@@ -24,12 +24,12 @@ public class DownloadThread implements Runnable {
 
     private void saveFile(DLOBJ obj) {
         String path = obj.Folder + filename + obj.Ext;
-        File folder = new File(obj.Folder);
+        File folder = new File(obj.Folder.getValue());
         File flDisabled = new File(path + ".disabled");
         File fl;
         if (flDisabled.exists()) {
             fl = new File(path + ".disabled");
-            if (obj.Override == CompatOverride.ENABLE) {
+            if (obj.Override.getValue() == CompatOverride.ENABLE) {
                 fl.renameTo(new File(path));
                 fl = new File(path);
             } else {
@@ -37,7 +37,7 @@ public class DownloadThread implements Runnable {
             }
         } else {
             fl = new File(path);
-            if (obj.Override == CompatOverride.DISABLE) {
+            if (obj.Override.getValue() == CompatOverride.DISABLE) {
                 fl.renameTo(new File(path + ".disabled"));
                 return;
             }
@@ -47,15 +47,15 @@ public class DownloadThread implements Runnable {
                 FileInputStream fis = new FileInputStream(path);
                 String MD5 = Utils.MD5(fis);
                 fis.close();
-                if (MD5.equals(obj.Hash)) {
+                if (MD5.equals(obj.Hash.getValue())) {
                     return;
                 }
             } catch (IOException ignored) {
             }
         }
-        if (obj.Side.isClient() == Side.isClient() || obj.Side.isServer() == Side.isServer()) {
+        if (obj.Side.getValue().isClient() == Side.isClient() || obj.Side.getValue().isServer() == Side.isServer()) {
             System.out.println("Started downloading : " + filename+ " : " + obj.Hash);
-            byte[] byt = GetFile(obj.URL);
+            byte[] byt = GetFile(obj.URL.getValue());
             if (byt == null) {
                 System.out.println("unable to download file: " + filename);
                 return;
