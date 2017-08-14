@@ -12,12 +12,12 @@ import java.util.ArrayList;
 
 public class TypedDataAdapter implements JsonSerializer<TypedData>, JsonDeserializer<TypedData> {
     @Override
-    public JsonElement serialize(TypedData typedData, Type type, JsonSerializationContext jsonSerializationContext) {
+    public JsonElement serialize(TypedData typedData, Type type, JsonSerializationContext jsonCtx) {
         return Statics.Json.toJsonTree(typedData.getValue());
     }
 
     @Override
-    public TypedData deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+    public TypedData deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonCtx) throws JsonParseException {
         if (jsonElement.isJsonArray()) {
             TypedData<ArrayList> d = new TypedData<>(DataType.LIST);
             d.setValue(Statics.Json.fromJson(jsonElement.getAsJsonArray(), ArrayList.class));
@@ -29,17 +29,19 @@ public class TypedDataAdapter implements JsonSerializer<TypedData>, JsonDeserial
             } else if (jso.isString()) {
                 if(type.getTypeName().contains("java.lang")) {
                     return TypedData.string(jso.getAsString());
-                } else if(type.getTypeName().contains("Sided")) {
-                    return TypedData.Enum(Statics.Json.fromJson(jsonElement, Sided.class));
-                } else if(type.getTypeName().contains("CompatOverride")) {
-                    return TypedData.Enum(Statics.Json.fromJson(jsonElement, CompatOverride.class));
+                } else {
+                    try {
+                        Class<? extends Enum> enm = (Class<? extends Enum>) Class.forName(type.getTypeName().substring(type.getTypeName().indexOf("<") + 1, type.getTypeName().lastIndexOf(">")));
+                        return TypedData.Enum(jsonCtx.deserialize(jsonElement, enm));
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 }
             } else {
-                System.out.println(jsonElement.getAsString());
                 return null;
             }
         } else if (jsonElement.isJsonObject()) {
-            return new TypedData<>(jsonDeserializationContext.deserialize(jsonElement.getAsJsonObject(), Object.class), DataType.OBJECT);
+            return new TypedData<>(jsonCtx.deserialize(jsonElement.getAsJsonObject(), Object.class), DataType.OBJECT);
         }
         return null;
     }
