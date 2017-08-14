@@ -2,8 +2,6 @@ package mcmu.JsonTypeAdapters;
 
 import com.google.gson.*;
 import mcmu.Statics;
-import mcmu.containers.CompatOverride;
-import mcmu.containers.Sided;
 import mcmu.containers.typed_structures.DataType;
 import mcmu.containers.typed_structures.TypedData;
 
@@ -31,7 +29,8 @@ public class TypedDataAdapter implements JsonSerializer<TypedData>, JsonDeserial
                     return TypedData.string(jso.getAsString());
                 } else {
                     try {
-                        Class<? extends Enum> enm = (Class<? extends Enum>) Class.forName(type.getTypeName().substring(type.getTypeName().indexOf("<") + 1, type.getTypeName().lastIndexOf(">")));
+                        String typeName = type.getTypeName();
+                        Class<? extends Enum> enm = (Class<? extends Enum>) Class.forName(typeName.substring(type.getTypeName().indexOf("<") + 1, typeName.lastIndexOf(">")));
                         return TypedData.Enum(jsonCtx.deserialize(jsonElement, enm));
                     } catch (ClassNotFoundException e) {
                         e.printStackTrace();
@@ -41,7 +40,17 @@ public class TypedDataAdapter implements JsonSerializer<TypedData>, JsonDeserial
                 return null;
             }
         } else if (jsonElement.isJsonObject()) {
-            return new TypedData<>(jsonCtx.deserialize(jsonElement.getAsJsonObject(), Object.class), DataType.OBJECT);
+            String typeName = type.getTypeName();
+            Class<?> clazz = null;
+            try {
+                clazz = Class.forName(typeName.substring(type.getTypeName().indexOf("<") + 1, typeName.lastIndexOf(">")));
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            if(clazz != null)
+                return new TypedData<>(jsonCtx.deserialize(jsonElement.getAsJsonObject(), clazz), DataType.OBJECT);
+            else
+                return new TypedData<>(jsonCtx.deserialize(jsonElement.getAsJsonObject(), Object.class), DataType.OBJECT);
         }
         return null;
     }
