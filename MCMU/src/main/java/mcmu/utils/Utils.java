@@ -4,11 +4,9 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLClassLoader;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
@@ -16,14 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Utils {
-    public static void addPath(String s) throws Exception {
-        URL u = new URL(s);
-        URLClassLoader urlClassLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
-        Class urlClass = URLClassLoader.class;
-        Method method = urlClass.getDeclaredMethod("addURL", new Class[]{URL.class});
-        method.setAccessible(true);
-        method.invoke(urlClassLoader, new Object[]{u});
-    }
     public static byte[] getBytes(InputStream is) throws IOException {
         int size = 1024;
         byte[] buf;
