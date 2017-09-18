@@ -18,7 +18,13 @@ public class MCMU implements IMCMU {
     private FileList flst;
     private HashMap<String, IPlugin> plugs = new HashMap<>();
     public MCMU() {
+        try {
+            Utils.addPath(ClassLoader.getSystemClassLoader().getResource(".").getPath());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         run();
+        //we are likely being run from MCMU wrapper
     }
 
     @Override
