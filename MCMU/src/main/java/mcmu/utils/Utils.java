@@ -4,9 +4,12 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -42,5 +45,36 @@ public class Utils {
             Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    public static String getString(String loc) {
+        try {
+            return new Scanner(new URL(loc).openStream(), "UTF-8").useDelimiter("\\A").next();
+        } catch (IOException e) {
+            System.out.println("Error in loading URL: "+loc);
+        }
+        return "";
+    }
+    public static byte[] getFile(String Addr) {
+        byte[] bytes;
+        try {
+            HttpURLConnection conn = (HttpURLConnection) new URL(Addr).openConnection();
+            conn.setInstanceFollowRedirects(true);
+            conn.connect();
+            switch (conn.getResponseCode()) {
+                case 307:
+                case 302:
+                    String newURL = conn.getHeaderField("Location");
+                    return getFile(newURL);
+            }
+            bytes = Utils.getBytes(conn.getInputStream());
+        } catch (MalformedURLException ex) {
+            System.out.println("Malformed URL in index: " + Addr);
+            return null;
+        } catch (IOException ex) {
+            System.out.println("Unable to download mod at: " + Addr);
+            System.out.println(ex.getMessage());
+            return null;
+        }
+        return bytes;
     }
 }

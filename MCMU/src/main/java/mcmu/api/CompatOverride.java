@@ -1,6 +1,4 @@
-package mcmu.containers;
-
-import mcmu.containers.interfaces.StructEncoder;
+package mcmu.api;
 
 /**
  * Created by bradl on 8/13/2016.

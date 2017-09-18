@@ -1,4 +1,4 @@
-package mcmu.JsonTypeAdapters;
+package mcmu.TypeAdapters;
 
 import com.google.gson.*;
 
