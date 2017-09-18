@@ -39,13 +39,13 @@ public class ConfigTask implements Runnable {
             Enumeration e = zip.entries();
             while(e.hasMoreElements()) {
                 ZipEntry ent = (ZipEntry) e.nextElement();
-                File dir = new File(dirpart("config/"+ent.getName()).replace("/", File.separator));
-                dir.mkdirs();
                 if(!ent.isDirectory()) {
                     InputStream is = zip.getInputStream(ent);
                     FileOutputStream fos = new FileOutputStream(new File("config/"+ent.getName()));
                     fos.write(Utils.getBytes(is));
                     fos.close();
+                } else {
+                    new File("config/"+ent.getName()).mkdirs();
                 }
             }
         } catch (FileNotFoundException e) {
