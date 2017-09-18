@@ -24,7 +24,7 @@ public class MainTask implements Runnable {
         if(cont!= null) {
             if(cont.files!=null)
                 cont.files.forEach((s, dlobj) -> exeSrv.execute(new DownloadTask(s, dlobj, mcmu)));
-            if (cont.files != null)
+            if (cont.rmfiles != null)
                 cont.rmfiles.forEach((rmobj) -> exeSrv.execute((new RemoveTask(rmobj))));
             if (cont.config != null)
                 exeSrv.execute(new ConfigTask(cont.config));
