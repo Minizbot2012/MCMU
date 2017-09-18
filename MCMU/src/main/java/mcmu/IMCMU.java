@@ -1,8 +1,7 @@
 package mcmu;
 
 import com.google.gson.Gson;
-import mcmu.api.Sided;
-import mcmu.api.IPlugin;
+import mcmu.api.*;
 
 import java.util.HashMap;
 import java.util.concurrent.ExecutorService;
