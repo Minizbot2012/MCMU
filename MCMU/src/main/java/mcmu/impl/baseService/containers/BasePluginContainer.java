@@ -5,7 +5,6 @@ import java.util.List;
 
 public class BasePluginContainer {
     public HashMap<String, DLOBJ> files;
-    public BasePluginContainer upd;
     public List<RMOBJ> rmfiles;
     public Config config;
 }
