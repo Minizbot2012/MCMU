@@ -5,7 +5,6 @@ import mcmu.utils.Utils;
 
 import java.io.*;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;

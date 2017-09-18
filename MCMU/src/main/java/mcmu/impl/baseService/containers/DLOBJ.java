@@ -10,7 +10,4 @@ public class DLOBJ {
     public String Folder = "mods/";
     public CompatOverride Override = CompatOverride.NONE;
     public Sided Side = Sided.BOTH;
-    public DLOBJ() {
-
-    }
 }
