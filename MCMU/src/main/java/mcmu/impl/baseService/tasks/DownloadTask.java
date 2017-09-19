@@ -31,8 +31,10 @@ public class DownloadTask implements Runnable {
             }
             if(dlobj.Override == CompatOverride.DISABLE) {
                 ufd.renameTo(fild);
-            } else {
+                ufd = fild;
+            } else if(dlobj.Override == CompatOverride.ENABLE) {
                 ufd.renameTo(fil);
+                ufd = fil;
             }
             try {
                 if(ufd.exists() && Utils.MD5(new FileInputStream(ufd)).equals(dlobj.Hash)) {
