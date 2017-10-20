@@ -7,18 +7,22 @@ import mcmu.api.*;
 import mcmu.containers.*;
 import mcmu.downloader.ModLoader;
 import mcmu.utils.*;
+import sun.plugin2.main.server.Plugin;
 
 import java.io.*;
 import java.net.URLClassLoader;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import static mcmu.Statics.*;
 public class MCMU implements IMCMU {
     public static ConfigFile cnf;
     private FileList flst;
     private HashMap<String, IPlugin> plugs = new HashMap<>();
+    ArrayList<ModLoader> mlds;
     public MCMU() {
+        mlds = new ArrayList<>();
         run();
         //we are likely being run from MCMU wrapper
     }
@@ -53,10 +57,22 @@ public class MCMU implements IMCMU {
             loadPlugins();
             loadURL();
             runPlugins();
-            Thread.sleep(4000);
+            while(PluginsRunning) {
+                Iterator<ModLoader> mldi = mlds.iterator();
+                while(mldi.hasNext()) {
+                    ModLoader mldr = mldi.next();
+                    if(mldr.getCompleted()) {
+                        mldi.remove();
+                    }
+                }
+                if(mlds.size() == 0) {
+                    PluginsRunning = false;
+                }
+                Thread.sleep(1000);
+            }
             Statics.threadPool.shutdown();
-            while(!Statics.threadPool.isTerminated());
-        } catch (InterruptedException e) {
+            while (!Statics.threadPool.isTerminated()) ;
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -69,7 +85,7 @@ public class MCMU implements IMCMU {
     private void runPlugins() {
         plugs.forEach((Str,IPlug) -> {
             System.out.println(Str);
-            new ModLoader(IPlug, flst.flst.get(Str));
+            mlds.add(new ModLoader(IPlug, flst.flst.get(Str)));
         });
     }
     private void initializeGson() {
