@@ -9,6 +9,7 @@ import mcmu.downloader.ModLoader;
 import mcmu.utils.*;
 
 import java.io.*;
+import java.net.URLClassLoader;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 
@@ -89,7 +90,7 @@ public class MCMU implements IMCMU {
     }
     private void loadPlugins() {
         try {
-            for (IPlugin plug : ServiceLoader.load(IPlugin.class)) {
+            for (IPlugin plug : ServiceLoader.load(IPlugin.class, this.getClass().getClassLoader())) {
                 addPlugin(plug.getPlugspace(), plug);
             }
         } catch (Exception e) {
