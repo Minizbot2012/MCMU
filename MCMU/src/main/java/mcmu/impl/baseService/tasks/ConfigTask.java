@@ -21,6 +21,10 @@ public class ConfigTask implements Runnable {
     @Override
     public void run() {
         System.out.println("Downloading configs");
+        File cnffolder = new File("config/");
+        if(!cnffolder.exists()) {
+            cnffolder.mkdirs();
+        }
         File cnf = new File("Config-bp.zip");
         if(cnf.exists()) {
             try {
