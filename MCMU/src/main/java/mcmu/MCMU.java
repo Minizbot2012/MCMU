@@ -43,9 +43,9 @@ public class MCMU implements IMCMU {
     }
 
     @Override
-    public void addPlugin(String n, IPlugin plg) {
-        plg.init(this, cnf.conf.getOrDefault(n, null));
-        plugs.put(n, plg);
+    public void addPlugin(IPlugin plg) {
+        plg.init(this, cnf.conf.getOrDefault(plg.getPlugspace(), null));
+        plugs.put(plg.getPlugspace(), plg);
     }
     public Sided getSide() {
         return cnf.Side;
@@ -106,11 +106,13 @@ public class MCMU implements IMCMU {
     }
     private void loadPlugins() {
         try {
-            for (IPlugin plug : ServiceLoader.load(IPlugin.class)) {
-                addPlugin(plug.getPlugspace(), plug);
+            Iterator<IPlugin> iPlugins = ServiceLoader.load(IPlugin.class, getClass().getClassLoader()).iterator();
+            while (iPlugins.hasNext()) {
+                IPlugin plg = iPlugins.next();
+                addPlugin(plg);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch(Exception x) {
+            //empty catch block, ignore this error.
         }
     }
 }

@@ -11,6 +11,6 @@ public interface IMCMU {
     ExecutorService getExecutor();
     HashMap<String, IPlugin> getPlugins();
     Sided getSide();
-    void addPlugin(String name, IPlugin plg);
+    void addPlugin(IPlugin plg);
     void run();
 }
