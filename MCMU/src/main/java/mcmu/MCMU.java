@@ -106,7 +106,7 @@ public class MCMU implements IMCMU {
     }
     private void loadPlugins() {
         try {
-            for (IPlugin plug : ServiceLoader.load(IPlugin.class, this.getClass().getClassLoader())) {
+            for (IPlugin plug : ServiceLoader.load(IPlugin.class)) {
                 addPlugin(plug.getPlugspace(), plug);
             }
         } catch (Exception e) {
