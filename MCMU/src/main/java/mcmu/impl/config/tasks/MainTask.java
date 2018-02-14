@@ -8,11 +8,12 @@ public class MainTask implements Runnable {
     Config conf;
     public MainTask(IMCMU mmu, Config cont) {
         this.api = mmu;
+        this.conf = cont;
     }
     @Override
     public void run() {
         if(conf != null) {
-            this.api.getExecutor().submit(new ConfigTask(conf));
+            this.api.getExecutor().execute(new ConfigTask(conf));
         }
     }
 }
