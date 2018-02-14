@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MCMU-Shadows">
+    <output-path>$PROJECT_DIR$/out/artifacts/MCMU_Shadows</output-path>
+    <root id="archive" name="MCMU-Shadows.jar">
+      <element id="module-output" name="MCMU" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.0/gson-2.8.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

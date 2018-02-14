@@ -1,4 +1,4 @@
-package mcmu.impl.baseService.containers;
+package mcmu.impl.config.containers;
 
 public class Config {
     public String URL;

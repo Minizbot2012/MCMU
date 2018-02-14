@@ -1,6 +1,6 @@
-package mcmu.impl.baseService.tasks;
+package mcmu.impl.config.tasks;
 
-import mcmu.impl.baseService.containers.Config;
+import mcmu.impl.config.containers.Config;
 import mcmu.utils.Utils;
 
 import java.io.*;

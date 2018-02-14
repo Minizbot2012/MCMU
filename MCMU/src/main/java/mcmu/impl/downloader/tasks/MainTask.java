@@ -1,11 +1,9 @@
-package mcmu.impl.baseService.tasks;
+package mcmu.impl.downloader.tasks;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import mcmu.IMCMU;
-import mcmu.impl.baseService.containers.BasePluginContainer;
+import mcmu.impl.downloader.containers.BasePluginContainer;
 
 import java.io.File;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 
 public class MainTask implements Runnable {
@@ -24,12 +22,12 @@ public class MainTask implements Runnable {
             new File("mods/").mkdirs();
         }
         if(cont!= null) {
-            if(cont.files!=null)
+            if(cont.files!=null) {
                 cont.files.forEach((s, dlobj) -> exeSrv.execute(new DownloadTask(s, dlobj, mcmu)));
-            if (cont.rmfiles != null)
+            }
+            if (cont.rmfiles != null) {
                 cont.rmfiles.forEach((rmobj) -> exeSrv.execute((new RemoveTask(rmobj))));
-            if (cont.config != null)
-                exeSrv.execute(new ConfigTask(cont.config));
+            }
         }
     }
 }

@@ -1,8 +1,7 @@
 package mcmu.containers;
 
-import java.util.*;
+import java.util.HashMap;
 
 public class FileList {
-    public Object conf;
     public HashMap<String, Object> flst;
 }

@@ -1,11 +1,13 @@
-package mcmu.impl.baseService.tasks;
+package mcmu.impl.downloader.tasks;
 
 import mcmu.IMCMU;
 import mcmu.api.CompatOverride;
-import mcmu.impl.baseService.containers.DLOBJ;
+import mcmu.impl.downloader.containers.DLOBJ;
 import mcmu.utils.Utils;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
 public class DownloadTask implements Runnable {
     private String fileName;

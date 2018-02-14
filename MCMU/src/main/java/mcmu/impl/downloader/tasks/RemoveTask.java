@@ -1,6 +1,6 @@
-package mcmu.impl.baseService.tasks;
+package mcmu.impl.downloader.tasks;
 
-import mcmu.impl.baseService.containers.RMOBJ;
+import mcmu.impl.downloader.containers.RMOBJ;
 
 import java.io.File;
 

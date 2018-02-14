@@ -1,4 +1,4 @@
-package mcmu.impl.baseService.containers;
+package mcmu.impl.downloader.containers;
 
 public class RMOBJ {
     public String FileName;

@@ -1,6 +1,5 @@
 package mcmu.downloader;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import mcmu.Statics;
 import mcmu.api.IPlugin;
 

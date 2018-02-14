@@ -2,7 +2,7 @@ package mcmu.containers;
 
 import mcmu.api.Sided;
 
-import java.util.*;
+import java.util.HashMap;
 
 public class ConfigFile {
     public HashMap<String, Object> conf = new HashMap<>();

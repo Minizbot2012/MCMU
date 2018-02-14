@@ -1,4 +1,6 @@
-package mcmu.impl.baseService.containers;
+package mcmu.impl.downloader.containers;
+
+import mcmu.impl.config.containers.Config;
 
 import java.util.HashMap;
 import java.util.List;

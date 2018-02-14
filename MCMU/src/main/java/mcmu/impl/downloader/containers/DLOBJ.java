@@ -1,7 +1,7 @@
-package mcmu.impl.baseService.containers;
+package mcmu.impl.downloader.containers;
 
-import mcmu.api.Sided;
 import mcmu.api.CompatOverride;
+import mcmu.api.Sided;
 
 public class DLOBJ {
     public String URL;

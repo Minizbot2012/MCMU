@@ -1,1 +1,2 @@
-mcmu.impl.baseService.MainPlugin
+mcmu.impl.downloader.MainPlugin
+mcmu.impl.config.ConfigPlugin

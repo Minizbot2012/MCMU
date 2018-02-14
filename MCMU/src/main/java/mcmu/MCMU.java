@@ -2,18 +2,23 @@ package mcmu;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import mcmu.TypeAdapters.*;
-import mcmu.api.*;
-import mcmu.containers.*;
+import mcmu.TypeAdapters.EnumTypeAdapter;
+import mcmu.api.CompatOverride;
+import mcmu.api.IPlugin;
+import mcmu.api.Sided;
+import mcmu.containers.ConfigFile;
+import mcmu.containers.FileList;
 import mcmu.downloader.ModLoader;
-import mcmu.utils.*;
-import sun.plugin2.main.server.Plugin;
+import mcmu.utils.Utils;
 
-import java.io.*;
-import java.net.URLClassLoader;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.ServiceLoader;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import static mcmu.Statics.*;
 public class MCMU implements IMCMU {
@@ -85,7 +90,7 @@ public class MCMU implements IMCMU {
     private void runPlugins() {
         plugs.forEach((Str,IPlug) -> {
             System.out.println(Str);
-            mlds.add(new ModLoader(IPlug, flst.flst.get(Str)));
+            mlds.add(new ModLoader(IPlug, Json.fromJson(Json.toJson(flst.flst.get(Str)), IPlug.getRemoteFormat())));
         });
     }
     private void initializeGson() {
