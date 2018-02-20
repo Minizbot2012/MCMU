@@ -16,7 +16,11 @@ public class MainPlugin implements IPlugin<Object, BasePluginContainer> {
 
     @Override
     public void recRemote(BasePluginContainer downloads) {
-        cont = downloads;
+        if(downloads != null) {
+            cont = downloads;
+        } else {
+            cont = new BasePluginContainer();
+        }
     }
 
     @Override
@@ -36,6 +40,15 @@ public class MainPlugin implements IPlugin<Object, BasePluginContainer> {
 
     @Override
     public Class getLocalFormat() {
-        return null;
+        return Object.class;
+    }
+
+    @Override
+    public void postInit() {
+
+    }
+
+    public void mergeLists(BasePluginContainer merger) {
+        cont.mergeList(merger);
     }
 }

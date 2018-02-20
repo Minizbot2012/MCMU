@@ -36,6 +36,11 @@ public class ConfigPlugin implements IPlugin<Object, Config> {
 
     @Override
     public Class getLocalFormat() {
-        return null;
+        return Object.class;
+    }
+
+    @Override
+    public void postInit() {
+
     }
 }

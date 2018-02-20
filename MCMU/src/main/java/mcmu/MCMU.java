@@ -49,7 +49,7 @@ public class MCMU implements IMCMU {
 
     @Override
     public void addPlugin(IPlugin plg) {
-        plg.init(this, cnf.conf.getOrDefault(plg.getPlugspace(), null));
+        plg.init(this, Json.fromJson(Json.toJson(cnf.conf.getOrDefault(plg.getPlugspace(), null)), plg.getLocalFormat()));
         plugs.put(plg.getPlugspace(), plg);
     }
     public Sided getSide() {
@@ -61,6 +61,8 @@ public class MCMU implements IMCMU {
             loadConfig();
             loadPlugins();
             loadURL();
+            initPlugins();
+            postInit();
             runPlugins();
             while(PluginsRunning) {
                 Iterator<ModLoader> mldi = mlds.iterator();
@@ -87,10 +89,20 @@ public class MCMU implements IMCMU {
     public static void main(String[] args) {
         new MCMU();
     }
-    private void runPlugins() {
+    private void initPlugins() {
         plugs.forEach((Str,IPlug) -> {
             System.out.println(Str);
             mlds.add(new ModLoader(IPlug, Json.fromJson(Json.toJson(flst.flst.get(Str)), IPlug.getRemoteFormat())));
+        });
+    }
+    private void postInit() {
+        mlds.forEach((mld) -> {
+            mld.postInit();
+        });
+    }
+    private void runPlugins() {
+        mlds.forEach((plug) -> {
+            plug.run();
         });
     }
     private void initializeGson() {

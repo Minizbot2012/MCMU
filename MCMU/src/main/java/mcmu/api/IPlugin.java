@@ -9,4 +9,5 @@ public interface IPlugin<L, R> {
     String getPlugspace();
     Class getRemoteFormat();
     Class getLocalFormat();
+    void postInit();
 }

@@ -1,2 +1,3 @@
+mcmu.impl.extendedPack.PackExt
 mcmu.impl.downloader.MainPlugin
 mcmu.impl.config.ConfigPlugin
