@@ -61,6 +61,7 @@ public class MCMU implements IMCMU {
             loadConfig();
             loadPlugins();
             loadURL();
+            System.setProperty("http.agent", flst.userAgent);
             initPlugins();
             postInit();
             runPlugins();
