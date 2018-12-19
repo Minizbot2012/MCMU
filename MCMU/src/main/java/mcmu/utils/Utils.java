@@ -1,12 +1,12 @@
 package mcmu.utils;
 
+import mcmu.Statics;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
@@ -37,7 +37,7 @@ public class Utils {
             byte[] array = md.digest(getBytes(fis));
             StringBuilder sb = new StringBuilder();
             for (byte anArray : array) {
-                sb.append(Integer.toHexString(anArray & 0xFF | 0x100).substring(1, 3));
+                sb.append(Integer.toHexString(anArray & 0xFF | 0x100), 1, 3);
             }
             return sb.toString();
         } catch (NoSuchAlgorithmException ignored) {
@@ -55,17 +55,31 @@ public class Utils {
         return "";
     }
     public static byte[] getFile(String Addr) {
-        byte[] bytes;
+        byte[] bytes = null;
         try {
-            HttpURLConnection conn = (HttpURLConnection) new URL(Addr).openConnection();
-            conn.setInstanceFollowRedirects(true);
-            conn.connect();
-            switch (conn.getResponseCode()) {
-                case 307:
-                case 302:
-                    String newURL = conn.getHeaderField("Location");
-                    return getFile(newURL);
+            k
+            HttpURLConnection conn = null;
+            URI uri = new URI(Addr);
+            for (; ; ) {
+                URL url = uri.toURL();
+                conn = (HttpURLConnection) url.openConnection();
+                conn.addRequestProperty("User-Agent", Statics.self.getFileList().userAgent);
+                conn.setInstanceFollowRedirects(true);
+                String redirectLocation = conn.getHeaderField("Location");
+                if (redirectLocation == null)
+                    break;
+                conn.setInstanceFollowRedirects(false);
+                if (redirectLocation.startsWith("/"))
+                    uri = new URI(uri.getScheme(), uri.getHost(), redirectLocation, uri.getFragment());
+                else {
+                    try {
+                        uri = new URI(redirectLocation);
+                    } catch (URISyntaxException e) {
+                        uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(), url.getPath(), url.getQuery(), url.getRef());
+                    }
+                }
             }
+            conn.connect();
             bytes = Utils.getBytes(conn.getInputStream());
         } catch (MalformedURLException ex) {
             System.out.println("Malformed URL in index: " + Addr);
@@ -74,6 +88,8 @@ public class Utils {
             System.out.println("Unable to download mod at: " + Addr);
             System.out.println(ex.getMessage());
             return null;
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
         }
         return bytes;
     }

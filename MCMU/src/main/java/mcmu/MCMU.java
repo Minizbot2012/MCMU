@@ -56,12 +56,12 @@ public class MCMU implements IMCMU {
         return cnf.Side;
     }
     public void run() {
+        self = this;
         try {
             initializeGson();
             loadConfig();
             loadPlugins();
             loadURL();
-            System.setProperty("http.agent", flst.userAgent);
             initPlugins();
             postInit();
             runPlugins();
@@ -86,6 +86,10 @@ public class MCMU implements IMCMU {
     }
     public void loadURL() {
         flst = Json.fromJson(Utils.getString(cnf.URL), FileList.class);
+    }
+
+    public FileList getFileList() {
+        return this.flst;
     }
     public static void main(String[] args) {
         new MCMU();
