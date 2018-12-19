@@ -57,7 +57,6 @@ public class Utils {
     public static byte[] getFile(String Addr) {
         byte[] bytes = null;
         try {
-            k
             HttpURLConnection conn = null;
             URI uri = new URI(Addr);
             for (; ; ) {
