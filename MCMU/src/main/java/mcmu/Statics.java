@@ -12,7 +12,6 @@ import java.util.concurrent.Executors;
 public class Statics {
     public static Gson Json;
     public static Sided Side;
-    public static boolean Restart;
     public static ExecutorService threadPool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
     public static boolean PluginsRunning = true;
     public static IMCMU self;
