@@ -6,8 +6,8 @@ import java.io.File;
 
 public class RemoveTask implements Runnable {
     private RMOBJ rmobj;
-    public RemoveTask(RMOBJ obj) {
-        this.rmobj = obj;
+    public RemoveTask(RMOBJ rmobj) {
+        this.rmobj = rmobj;
     }
 
     @Override

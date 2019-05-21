@@ -14,10 +14,10 @@ public class DownloadTask implements Runnable {
     private DLOBJ dlobj;
     private IMCMU mcmu;
     private String name;
-    public DownloadTask(String name, DLOBJ obj, IMCMU mcmu) {
-        this.fileName = obj.Folder + name + obj.Ext;
+    public DownloadTask(String name, DLOBJ dlobj, IMCMU mcmu) {
+        this.fileName = dlobj.Folder + name + dlobj.Ext;
         this.name = name;
-        this.dlobj = obj;
+        this.dlobj = dlobj;
         this.mcmu = mcmu;
     }
     @Override

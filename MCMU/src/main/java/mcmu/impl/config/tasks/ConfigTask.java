@@ -14,10 +14,7 @@ public class ConfigTask implements Runnable {
     public ConfigTask(Config cnf) {
         this.conf = cnf;
     }
-    private String dirpart(String name) {
-        int s = name.lastIndexOf(File.separatorChar);
-        return s == -1 ? "" : name.substring(0, s);
-    }
+
     @Override
     public void run() {
         System.out.println("Downloading configs");

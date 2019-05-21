@@ -38,14 +38,4 @@ public class PackExt implements IPlugin<Object, String> {
     public String getPlugspace() {
         return "extends";
     }
-
-    @Override
-    public Class getRemoteFormat() {
-        return String.class;
-    }
-
-    @Override
-    public Class getLocalFormat() {
-        return Object.class;
-    }
 }

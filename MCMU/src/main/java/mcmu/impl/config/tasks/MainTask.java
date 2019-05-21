@@ -6,8 +6,8 @@ import mcmu.impl.config.containers.Config;
 public class MainTask implements Runnable {
     IMCMU api;
     Config conf;
-    public MainTask(IMCMU mmu, Config cont) {
-        this.api = mmu;
+    public MainTask(IMCMU mcmu, Config cont) {
+        this.api = mcmu;
         this.conf = cont;
     }
     @Override
